@@ -1,9 +1,12 @@
 #include "enemy.h"
 
-Enemy::Enemy() 
+Enemy::Enemy()
 {
-};
-Enemy::~Enemy() {};
+	collisionType = entityNS::BOX;
+}
+;
+
+Enemy::~Enemy() {}
 
 void Enemy::update(float frameTime)
 {
@@ -16,7 +19,7 @@ void Enemy::ai(float frameTime, Entity &ent)
 	Entity::ai(frameTime, ent);
 
 	D3DXVECTOR2 toVector = D3DXVECTOR2(ent.getCenterX() - this->getCenterX(), ent.getCenterY() - this->getCenterY()); // Direction from AI Enemy to Player
-	D3DXVECTOR2 vel = D3DXVECTOR2(0,0);
+	D3DXVECTOR2 vel = D3DXVECTOR2(0, 0);
 	if (toVector.y > 0)
 	{
 		vel.y = 75;

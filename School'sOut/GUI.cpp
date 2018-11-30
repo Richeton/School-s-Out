@@ -1,4 +1,4 @@
-#include "GUI.h"
+#include "gui.h"
 
 //=============================================================================
 // default constructor
@@ -13,7 +13,7 @@ GUI_Window::GUI_Window()
 	player_Icon.bottom = GAME_HEIGHT / 8;
 
 
-	health_Icon.left = GAME_WIDTH / 7; 
+	health_Icon.left = GAME_WIDTH / 7;
 	health_Icon.top = 0;
 
 	health_Icon.right = GAME_WIDTH / 5;

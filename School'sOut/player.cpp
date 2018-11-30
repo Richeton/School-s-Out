@@ -1,11 +1,13 @@
 #include "player.h"
 
-Player::Player() 
+Player::Player()
 {
+	collisionType = entityNS::BOX;
 }
 
 Player::Player(Input &input)
-{	
+{
+	Player();
 	this->input = &input;
 }
 
@@ -33,7 +35,7 @@ void Player::update(float frameTime)
 		// Uses '-' because moving up
 		// ... means decreasing in Y-axis
 		vel.y = -150; // <-- Set a const for it later
-		// Player doesn't wrap around when it hits the top
+					  // Player doesn't wrap around when it hits the top
 		if (getY() <= (GAME_BOUNDARY_YSTART))
 			setY((float)GAME_BOUNDARY_YSTART);
 
@@ -79,7 +81,7 @@ void Player::update(float frameTime)
 	{
 		// Uses '+' because moving right
 		// ... means increasing in X-axis
-		vel.x = 150;		
+		vel.x = 150;
 		// Player doesn't wrap around when it hits the right
 		// Have to '-' the 'width' of the sprite
 		// ... because it starts from the top left
@@ -88,20 +90,50 @@ void Player::update(float frameTime)
 			setX((float)GAME_BOUNDARY_XEND - getWidth());
 
 		setCurrentFrame(11);
-		
+
 	}
 
 	setVelocity(vel);
+
 	// This is for the 'Up' arrow key
 	// Player shoots up when pressed
-	
+	if (input->isKeyDown(VK_UP))
+	{
+		//shootUp();
+	}
+
 
 	// This is for the 'Down' arrow key
 	// Player shoots down when pressed
+	if (input->isKeyDown(VK_DOWN))
+	{
+		//shootDown();
+	}
 
 	// This is for the 'Left' arrow key
 	// Player shoots left when pressed
-	
+	if (input->isKeyDown(VK_LEFT))
+	{
+		//shootLeft();
+	}
+
 	// This is for the 'Right' arrow key
 	// Player shoots right when pressed
+	if (input->isKeyDown(VK_RIGHT))
+	{
+		//	setFrames(3, 18);
+		//	setCurrentFrame(3);
+
+	}
+
+}
+
+void Player::collisions()
+{
+
+}
+
+void Player::shootRight()
+{
+
 }

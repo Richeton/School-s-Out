@@ -142,7 +142,7 @@ public:
 	void    drawSprite(const SpriteData &spriteData,           // sprite to draw
 		COLOR_ARGB color = graphicsNS::WHITE);      // default to white color filter (no change)
 
-	// Reset the graphics device.
+													// Reset the graphics device.
 	HRESULT reset();
 
 	// Toggle, fullscreen or window display mode

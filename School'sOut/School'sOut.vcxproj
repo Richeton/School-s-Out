@@ -21,8 +21,9 @@
   <ItemGroup>
     <ClInclude Include="..\..\School%27sOut\School%27sOut\constants.h" />
     <ClInclude Include="..\..\School%27sOut\School%27sOut\enemy.h" />
+    <ClInclude Include="enemyAI.h" />
     <ClInclude Include="..\..\School%27sOut\School%27sOut\entity.h" />
-    <ClInclude Include="..\..\School%27sOut\School%27sOut\GUI.h" />
+    <ClInclude Include="gui.h" />
     <ClInclude Include="entityCollection.h" />
     <ClInclude Include="..\..\School%27sOut\School%27sOut\game.h" />
     <ClInclude Include="..\..\School%27sOut\School%27sOut\gameError.h" />
@@ -36,11 +37,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\School%27sOut\School%27sOut\enemy.cpp" />
+    <ClCompile Include="enemyAI.cpp" />
     <ClCompile Include="..\..\School%27sOut\School%27sOut\entity.cpp" />
     <ClCompile Include="..\..\School%27sOut\School%27sOut\entityCollection.cpp" />
     <ClCompile Include="..\..\School%27sOut\School%27sOut\game.cpp" />
     <ClCompile Include="..\..\School%27sOut\School%27sOut\graphics.cpp" />
-    <ClCompile Include="..\..\School%27sOut\School%27sOut\GUI.cpp" />
+    <ClCompile Include="gui.cpp" />
     <ClCompile Include="..\..\School%27sOut\School%27sOut\image.cpp" />
     <ClCompile Include="..\..\School%27sOut\School%27sOut\input.cpp" />
     <ClCompile Include="player.cpp" />

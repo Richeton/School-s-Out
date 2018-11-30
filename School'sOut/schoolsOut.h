@@ -13,6 +13,7 @@
 #include "textureManager.h"
 #include "image.h"
 #include <list>
+#include "entityCollection.h"
 
 //=============================================================================
 // This class is the core of the game
@@ -23,11 +24,10 @@ private:
 	// game items
 	TextureManager stageTexture;	// stage texture
 	TextureManager gameTexture;		// game texture
-	
-	
-	Player player;
-	Enemy enemy1;
-	Enemy enemy2;
+	EntityCollection entityCollection;
+	Player* player = new Player();
+	Enemy* enemy1 = new Enemy();
+
 	Image background;
 
 public:

@@ -12,7 +12,7 @@
 //=============================================================================
 SchoolsOut::SchoolsOut()
 {
-	
+
 }
 
 //=============================================================================
@@ -20,7 +20,7 @@ SchoolsOut::SchoolsOut()
 //=============================================================================
 SchoolsOut::~SchoolsOut()
 {
-    releaseAll();           // call onLostDevice() for every graphics item
+	releaseAll();           // call onLostDevice() for every graphics item
 }
 
 //=============================================================================
@@ -29,9 +29,9 @@ SchoolsOut::~SchoolsOut()
 //=============================================================================
 void SchoolsOut::initialize(HWND hwnd)
 {
-    Game::initialize(hwnd); // throws GameError
+	Game::initialize(hwnd); // throws GameError
 
-	// stage texture
+							// stage texture
 	if (!stageTexture.initialize(graphics, STAGE_BACKGROUND))
 		throw(GameError(gameErrorNS::FATAL_ERROR,
 			"Error initializing stage texture"));
@@ -47,31 +47,32 @@ void SchoolsOut::initialize(HWND hwnd)
 		throw(GameError(gameErrorNS::FATAL_ERROR,
 			"Error initializing background"));
 
+
+	entityCollection.addEntity(player);
+	entityCollection.addEntity(enemy1);
+
 	// player
-	if (!player.initialize(this, playerNS::WIDTH, playerNS::HEIGHT, playerNS::TEXTURE_COLS, &gameTexture))
+	if (!player->initialize(this, playerNS::WIDTH, playerNS::HEIGHT, playerNS::TEXTURE_COLS, &gameTexture))
 		throw(GameError(gameErrorNS::FATAL_ERROR,
 			"Error initializing player"));
 
 	// enemy1
-	if (!enemy1.initialize(this, enemyNS::WIDTH, enemyNS::HEIGHT, enemyNS::TEXTURE_COLS, &gameTexture))
+	if (!enemy1->initialize(this, enemyNS::WIDTH, enemyNS::HEIGHT, enemyNS::TEXTURE_COLS, &gameTexture))
 		throw(GameError(gameErrorNS::FATAL_ERROR,
 			"Error initializing enemy"));
 
-
-
-
 	// Set player position to a center of the game boundaries
-	player.setX(GAME_BOUNDARY_XSTART + (GAME_BOUNDARY_XEND - GAME_BOUNDARY_XSTART) / 2);
-	player.setY(GAME_BOUNDARY_YSTART + (GAME_BOUNDARY_YEND - GAME_BOUNDARY_YSTART) / 2);
+	player->setX(GAME_BOUNDARY_XSTART + (GAME_BOUNDARY_XEND - GAME_BOUNDARY_XSTART) / 2);
+	player->setY(GAME_BOUNDARY_YSTART + (GAME_BOUNDARY_YEND - GAME_BOUNDARY_YSTART) / 2);
 
 
 	// Set enemy1 position to left of the game boundaries 
-	enemy1.setX(GAME_BOUNDARY_XSTART);
-	enemy1.setY(GAME_BOUNDARY_YSTART + (GAME_BOUNDARY_YEND - GAME_BOUNDARY_YSTART) / 2);
+	enemy1->setX(GAME_BOUNDARY_XSTART);
+	enemy1->setY(GAME_BOUNDARY_YSTART + (GAME_BOUNDARY_YEND - GAME_BOUNDARY_YSTART) / 2);
 
-	
 
-    return;
+
+	return;
 }
 
 //=============================================================================
@@ -79,8 +80,7 @@ void SchoolsOut::initialize(HWND hwnd)
 //=============================================================================
 void SchoolsOut::update()
 {
-	player.update(frameTime);
-	enemy1.update(frameTime);
+	entityCollection.entityUpdate(frameTime);
 }
 
 //=============================================================================
@@ -89,7 +89,8 @@ void SchoolsOut::update()
 void SchoolsOut::ai()
 {
 	// enemy1's ai follows player
-	enemy1.ai(frameTime, player);
+	entityCollection.entityAI(frameTime, player);
+
 }
 
 //=============================================================================
@@ -97,12 +98,14 @@ void SchoolsOut::ai()
 //=============================================================================
 void SchoolsOut::collisions()
 {
+	/*
 	D3DXVECTOR2 colVect;
-	if (enemy1.collidesWith(player, colVect))
+	if (enemy1->collidesWith(player, colVect))
 	{
-		throw(GameError(gameErrorNS::FATAL_ERROR,
-			"Ho ho ho ha ha, ho ho ho he ha. Hello there, old chum. I’m gnot an elf. I’m gnot a goblin. I’m a gnome. And you’ve been, GNOMED’"));
+	throw(GameError(gameErrorNS::FATAL_ERROR,
+	"Test"));
 	}
+	*/
 }
 
 //=============================================================================
@@ -110,15 +113,12 @@ void SchoolsOut::collisions()
 //=============================================================================
 void SchoolsOut::render()
 {
-    graphics->spriteBegin();                // begin drawing sprites
-	background.draw();
-	player.draw();
-	player.setCurrentFrame(0);
-	
-	enemy1.draw();
-	enemy1.setCurrentFrame(15);
 
-    graphics->spriteEnd();                  // end drawing sprites
+	graphics->spriteBegin();                // begin drawing sprites
+	background.draw();
+	entityCollection.entityRender();
+	enemy1->setCurrentFrame(17);
+	graphics->spriteEnd();                  // end drawing sprites
 }
 
 //=============================================================================
@@ -127,10 +127,10 @@ void SchoolsOut::render()
 //=============================================================================
 void SchoolsOut::releaseAll()
 {
-//    nebulaTexture.onLostDevice();
-//    gameTextures.onLostDevice();
-    Game::releaseAll();
-    return;
+	//    nebulaTexture.onLostDevice();
+	//    gameTextures.onLostDevice();
+	Game::releaseAll();
+	return;
 }
 
 //=============================================================================
@@ -139,8 +139,8 @@ void SchoolsOut::releaseAll()
 //=============================================================================
 void SchoolsOut::resetAll()
 {
-//    gameTextures.onResetDevice();
-//    nebulaTexture.onResetDevice();
-    Game::resetAll();
-    return;
+	//    gameTextures.onResetDevice();
+	//    nebulaTexture.onResetDevice();
+	Game::resetAll();
+	return;
 }

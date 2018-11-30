@@ -1,6 +1,2 @@
-﻿  player.cpp
-d:\school'sout\school'sout\player.h(5): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-d:\school'sout\school'sout\player.h(6): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-d:\school'sout\school'sout\player.h(7): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-d:\school'sout\school'sout\projectile.h(5): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+﻿  enemyAI.cpp
   School'sOut.vcxproj -> D:\School'sOut\Debug\School'sOut.exe

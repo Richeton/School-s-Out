@@ -2,27 +2,32 @@
 #define _ENTITYCOLLECTION_H
 #define WIN32_LEAN_AND_MEAN
 
+
 #include "entity.h"
-#include <list>
+#include <vector>
 #include "player.h"
 
 
-class EntityCollection 
+class EntityCollection
 {
 private:
 
-	std::list<Entity> entityCollection;
+	std::vector<Entity*> entityCollection;
 
 public:
 
-	bool addEntity(Entity en);
+	bool addEntity(Entity* en);
 
-	bool deleteEntity(Entity en);
+	bool deleteEntity(Entity* en);
 
 	bool deleteEntity(int i);
 
 	Entity getEntity(int i);
 
+	bool entityUpdate(float frameTime);
+	bool entityAI(float frameTime, Entity * en);
+	bool entityCollision(Entity en);
+	bool entityRender();
 };
 
 

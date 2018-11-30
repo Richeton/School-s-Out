@@ -39,11 +39,11 @@ protected:
 	bool    active;         // only active entities may collide
 	bool    rotatedBoxReady;    // true when rotated collision box is ready
 
-	// --- The following functions are protected because they are not intended to be
-	// --- called from outside the class.
-	// Circular collision detection 
-	// Pre: &ent = Other entity
-	// Post: &collisionVector contains collision vector
+								// --- The following functions are protected because they are not intended to be
+								// --- called from outside the class.
+								// Circular collision detection 
+								// Pre: &ent = Other entity
+								// Post: &collisionVector contains collision vector
 	virtual bool collideCircle(Entity &ent, VECTOR2 &collisionVector);
 	// Axis aligned box collision detection
 	// Pre: &ent = Other entity
@@ -149,6 +149,9 @@ public:
 
 	// Is this entity outside the specified rectangle?
 	virtual bool outsideRect(RECT rect);
+
+	// Possible Collisions for this Entity <Samuel>
+	virtual void collisions();
 
 	// Does this entity collide with ent?
 	virtual bool collidesWith(Entity &ent, VECTOR2 &collisionVector);
