@@ -109,6 +109,15 @@ public:
 	//           Set functions            //
 	////////////////////////////////////////
 
+	// Set edge.
+	virtual void setEdge(int l,int r,int t,int b)
+	{
+		edge.left = l;
+		edge.top = t;
+		edge.bottom = b;
+		edge.right = r; 
+	}
+
 	// Set velocity.
 	virtual void  setVelocity(VECTOR2 v) { velocity = v; }
 

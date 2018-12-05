@@ -41,6 +41,7 @@ bool Entity::initialize(Game *gamePtr, int width, int height, int ncols,
 	return(Image::initialize(gamePtr->getGraphics(), width, height, ncols, textureM));
 }
 
+
 //=============================================================================
 // activate the entity
 //=============================================================================
@@ -415,3 +416,4 @@ void Entity::bounce(VECTOR2 &collisionVector, Entity &ent)
 	else
 		deltaV += (cUVdotVdiff)* cUV;
 }
+

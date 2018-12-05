@@ -19,10 +19,14 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\School%27sOut\School%27sOut\combatState.h" />
     <ClInclude Include="..\..\School%27sOut\School%27sOut\constants.h" />
     <ClInclude Include="..\..\School%27sOut\School%27sOut\enemy.h" />
-    <ClInclude Include="enemyAI.h" />
     <ClInclude Include="..\..\School%27sOut\School%27sOut\entity.h" />
+    <ClInclude Include="..\..\School%27sOut\School%27sOut\obstacle.h" />
+    <ClInclude Include="..\..\School%27sOut\School%27sOut\searchingState.h" />
+    <ClInclude Include="..\..\School%27sOut\School%27sOut\spawner.h" />
+    <ClInclude Include="..\..\School%27sOut\School%27sOut\state.h" />
     <ClInclude Include="gui.h" />
     <ClInclude Include="entityCollection.h" />
     <ClInclude Include="..\..\School%27sOut\School%27sOut\game.h" />
@@ -36,12 +40,16 @@
     <ClInclude Include="..\..\School%27sOut\School%27sOut\textureManager.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\School%27sOut\School%27sOut\combatState.cpp" />
     <ClCompile Include="..\..\School%27sOut\School%27sOut\enemy.cpp" />
-    <ClCompile Include="enemyAI.cpp" />
     <ClCompile Include="..\..\School%27sOut\School%27sOut\entity.cpp" />
     <ClCompile Include="..\..\School%27sOut\School%27sOut\entityCollection.cpp" />
     <ClCompile Include="..\..\School%27sOut\School%27sOut\game.cpp" />
     <ClCompile Include="..\..\School%27sOut\School%27sOut\graphics.cpp" />
+    <ClCompile Include="..\..\School%27sOut\School%27sOut\obstacle.cpp" />
+    <ClCompile Include="..\..\School%27sOut\School%27sOut\searchingState.cpp" />
+    <ClCompile Include="..\..\School%27sOut\School%27sOut\spawner.cpp" />
+    <ClCompile Include="..\..\School%27sOut\School%27sOut\state.cpp" />
     <ClCompile Include="gui.cpp" />
     <ClCompile Include="..\..\School%27sOut\School%27sOut\image.cpp" />
     <ClCompile Include="..\..\School%27sOut\School%27sOut\input.cpp" />

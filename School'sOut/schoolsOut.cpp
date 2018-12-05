@@ -12,7 +12,7 @@
 //=============================================================================
 SchoolsOut::SchoolsOut()
 {
-
+	guiwin = new GUI_Window();
 }
 
 //=============================================================================
@@ -20,6 +20,7 @@ SchoolsOut::SchoolsOut()
 //=============================================================================
 SchoolsOut::~SchoolsOut()
 {
+	SAFE_DELETE(guiwin);
 	releaseAll();           // call onLostDevice() for every graphics item
 }
 
@@ -48,29 +49,20 @@ void SchoolsOut::initialize(HWND hwnd)
 			"Error initializing background"));
 
 
-	entityCollection.addEntity(player);
-	entityCollection.addEntity(enemy1);
-
 	// player
 	if (!player->initialize(this, playerNS::WIDTH, playerNS::HEIGHT, playerNS::TEXTURE_COLS, &gameTexture))
 		throw(GameError(gameErrorNS::FATAL_ERROR,
 			"Error initializing player"));
 
-	// enemy1
-	if (!enemy1->initialize(this, enemyNS::WIDTH, enemyNS::HEIGHT, enemyNS::TEXTURE_COLS, &gameTexture))
-		throw(GameError(gameErrorNS::FATAL_ERROR,
-			"Error initializing enemy"));
+	entityCollection.add(player);
 
+
+	player->setEdge(-8, 8, -15, 15);
+
+	
 	// Set player position to a center of the game boundaries
 	player->setX(GAME_BOUNDARY_XSTART + (GAME_BOUNDARY_XEND - GAME_BOUNDARY_XSTART) / 2);
 	player->setY(GAME_BOUNDARY_YSTART + (GAME_BOUNDARY_YEND - GAME_BOUNDARY_YSTART) / 2);
-
-
-	// Set enemy1 position to left of the game boundaries 
-	enemy1->setX(GAME_BOUNDARY_XSTART);
-	enemy1->setY(GAME_BOUNDARY_YSTART + (GAME_BOUNDARY_YEND - GAME_BOUNDARY_YSTART) / 2);
-
-
 
 	return;
 }
@@ -79,8 +71,12 @@ void SchoolsOut::initialize(HWND hwnd)
 // Update all game items
 //=============================================================================
 void SchoolsOut::update()
-{
-	entityCollection.entityUpdate(frameTime);
+{	
+	spawner.enemySpawn(&entityCollection, player, *this, gameTexture, frameTime);
+	spawner.obstacleSpawn(&entityCollection, player, *this, gameTexture, frameTime);
+	entityCollection.update(frameTime);
+	guiwin->update(*player);
+
 }
 
 //=============================================================================
@@ -88,8 +84,12 @@ void SchoolsOut::update()
 //=============================================================================
 void SchoolsOut::ai()
 {
-	// enemy1's ai follows player
-	entityCollection.entityAI(frameTime, player);
+	// enemies ai follows player
+	entityCollection.ai(frameTime, player);
+//	
+	// enemyAI(frameTime, player);
+	//	entityCollection.entityAI(frameTime, player);
+	
 
 }
 
@@ -98,6 +98,29 @@ void SchoolsOut::ai()
 //=============================================================================
 void SchoolsOut::collisions()
 {
+	D3DXVECTOR2 colVect;
+	//enemySpawn.enemyCollision(player, frameTime);
+	/*WILSON'S GARBAGE
+	D3DXVsdECTOR2 colVect;
+	if (enemy1.collidesWith(player, colVect))
+	{
+		if (player.getHealth() > 0)
+		{
+			//float currentHealth = player.getHealth()
+			player.setHealth(player.getHealth() - 1);
+		}
+
+		else if (player.getHealth() <= 0)
+		{
+			game_state = 2;
+
+			//throw(GameError(gameErrorNS::FATAL_ERROR, "You ded"));
+			//SAFE_DELETE(guiwin);
+		}
+	}
+
+	*/
+
 	/*
 	D3DXVECTOR2 colVect;
 	if (enemy1->collidesWith(player, colVect))
@@ -116,19 +139,22 @@ void SchoolsOut::render()
 
 	graphics->spriteBegin();                // begin drawing sprites
 	background.draw();
-	entityCollection.entityRender();
-	enemy1->setCurrentFrame(17);
-	graphics->spriteEnd();                  // end drawing sprites
-}
+	entityCollection.render();
+	//enemySpawn.enemyRender();
 
+
+	graphics->spriteEnd();                  // end drawing sprites
+
+	font->DrawText(NULL, guiwin->returnHealth().c_str(), -1, &guiwin->returnPlayer(), DT_CENTER, graphicsNS::BLACK);
+	graphics->showBackbuffer();
+
+}
 //=============================================================================
 // The graphics device was lost.
 // Release all reserved video memory so graphics device may be reset.
 //=============================================================================
 void SchoolsOut::releaseAll()
 {
-	//    nebulaTexture.onLostDevice();
-	//    gameTextures.onLostDevice();
 	Game::releaseAll();
 	return;
 }
@@ -139,8 +165,6 @@ void SchoolsOut::releaseAll()
 //=============================================================================
 void SchoolsOut::resetAll()
 {
-	//    gameTextures.onResetDevice();
-	//    nebulaTexture.onResetDevice();
 	Game::resetAll();
 	return;
 }

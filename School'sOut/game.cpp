@@ -17,6 +17,7 @@ Game::Game()
 	paused = false;             // game is not paused
 	graphics = NULL;
 	initialized = false;
+	font = NULL;
 }
 
 //=============================================================================
@@ -119,9 +120,11 @@ void Game::initialize(HWND hw)
 	pauseRect.top = 0;
 	pauseRect.left = 0;
 	pauseRect.right = GAME_WIDTH;
+
 	pauseText = "The Game is Paused";
-	font = NULL;
-	hr = D3DXCreateFont(graphics->get3Ddevice(), 40, 0, FW_ULTRABOLD, 0, false, DEFAULT_CHARSET, OUT_DEFAULT_PRECIS, ANTIALIASED_QUALITY, FF_DONTCARE, "Arial", &font);
+	mainText = " Press Spacebar to start playing ";
+	restartText = "Oops you died! Press Spacebar to restart";
+	hr = D3DXCreateFont(graphics->get3Ddevice(), 30, 0, FW_ULTRABOLD, 0, false, DEFAULT_CHARSET, OUT_DEFAULT_PRECIS, ANTIALIASED_QUALITY, FF_DONTCARE, "Arial", &font);
 }
 
 //=============================================================================
@@ -133,8 +136,6 @@ void Game::renderGame()
 	if (SUCCEEDED(graphics->beginScene()))
 	{
 		render();           // call render() in derived object
-
-							//stop rendering
 		graphics->endScene();
 	}
 	handleLostGraphicsDevice();
@@ -183,6 +184,11 @@ void Game::setDisplayMode(graphicsNS::DISPLAY_MODE mode)
 }
 
 //=============================================================================
+// Render game items
+//=============================================================================
+
+
+//=============================================================================
 // Call repeatedly by the main message loop in WinMain
 //=============================================================================
 void Game::run(HWND hwnd)
@@ -211,51 +217,103 @@ void Game::run(HWND hwnd)
 		frameTime = MAX_FRAME_TIME; // limit maximum frameTime
 	timeStart = timeEnd;
 
-	// update(), ai(), and collisions() are pure virtual functions.
-	// These functions must be provided in the class that inherits from Game.
-	if (!paused)                    // if not paused
+	//look into enum for game state
+	if (game_state == 0)
 	{
-		update();                   // update all game items
-		ai();                       // artificial intelligence
-		collisions();               // handle collisions
-		renderGame();                   // draw all game items
-		input->vibrateControllers(frameTime); // handle controller vibration
-		input->readControllers();       // read state of controllers
-	}
-
-	else
-	{
-		//start rendering
 		if (SUCCEEDED(graphics->beginScene()))
 		{
-
-			font->DrawText(NULL, pauseText.c_str(), -1, &pauseRect, DT_CENTER | DT_VCENTER, graphicsNS::BLACK);
+			//code for main menu to detect enter key to start game
+			font->DrawText(NULL, mainText.c_str(), -1, &pauseRect, DT_CENTER | DT_VCENTER, graphicsNS::BLACK);
 			graphics->endScene();
 		}
-		handleLostGraphicsDevice();
-		//display the back buffer on the screen
 		graphics->showBackbuffer();
 	}
 
+
+	if (game_state == 1)
+	{
+		// if Esc-key pressed, set pause
+		if (input->wasKeyPressed(ESC_KEY))
+		{
+			if (paused)
+				paused = false;
+			else
+				paused = true;
+		}
+
+
+		// update(), ai(), and collisions() are pure virtual functions.
+		// These functions must be provided in the class that inherits from Game.
+		if (!paused)                    // if not paused
+		{
+			update();                   // update all game items
+			ai();                       // artificial intelligence
+			collisions();               // handle collisions
+			renderGame();                   // draw all game items
+			input->vibrateControllers(frameTime); // handle controller vibration
+			input->readControllers();       // read state of controllers
+		}
+
+
+
+		else
+		{
+			//start rendering
+			if (SUCCEEDED(graphics->beginScene()))
+			{
+
+				//font->DrawText(NULL, healthText.c_str(), -1, &guiwin->returnPlayer(), DT_CENTER, graphicsNS::BLACK);
+				font->DrawText(NULL, pauseText.c_str(), -1, &pauseRect, DT_CENTER | DT_VCENTER, graphicsNS::BLACK);
+				graphics->endScene();
+			}
+			handleLostGraphicsDevice();
+			//display the back buffer on the screen
+			graphics->showBackbuffer();
+		}
+
+	}
+
+
+	if (game_state == 2)
+	{
+
+		//code for main menu to detect enter key to restart game
+		if (SUCCEEDED(graphics->beginScene()))
+		{
+			//code for main menu to detect enter key to start game
+			font->DrawText(NULL, restartText.c_str(), -1, &pauseRect, DT_CENTER | DT_VCENTER, graphicsNS::BLACK);
+			graphics->endScene();
+		}
+		graphics->showBackbuffer();
+
+	}
 
 
 	// if Alt+Enter toggle fullscreen/window
 	if (input->isKeyDown(ALT_KEY) && input->wasKeyPressed(ENTER_KEY))
 		setDisplayMode(graphicsNS::TOGGLE); // toggle fullscreen/window
 
-											// if Esc-key pressed, set pause
-	if (input->wasKeyPressed(ESC_KEY))
-	{
-		if (paused)
-			paused = false;
-		else
-			paused = true;
-	}
 
+											//if space key pressed, check game state
+	if (input->wasKeyPressed(SPACE_KEY))
+	{
+		if (game_state == 0)
+		{
+			game_state = 1;
+		}
+		if (game_state == 2)
+		{
+			game_state = 0;
+			input->clear(inputNS::KEYS_PRESSED);
+			this->deleteAll();
+			this->initialize(hwnd);
+		}
+	}
 	// Clear input
 	// Call this after all key checks are done
 	input->clear(inputNS::KEYS_PRESSED);
 }
+
 
 //=============================================================================
 // The graphics device was lost.

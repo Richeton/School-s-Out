@@ -1,2 +1,26 @@
-﻿  enemyAI.cpp
+﻿  obstacle.cpp
+  spawner.cpp
+d:\school'sout\school'sout\player.h(5): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+d:\school'sout\school'sout\player.h(6): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+d:\school'sout\school'sout\player.h(7): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+d:\school'sout\school'sout\projectile.h(5): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+d:\school'sout\school'sout\spawner.cpp(21): warning C4244: 'initializing': conversion from 'UINT' to 'float', possible loss of data
+d:\school'sout\school'sout\spawner.cpp(22): warning C4244: 'initializing': conversion from 'UINT' to 'float', possible loss of data
+d:\school'sout\school'sout\spawner.cpp(33): warning C4244: '=': conversion from 'UINT' to 'float', possible loss of data
+d:\school'sout\school'sout\spawner.cpp(34): warning C4244: '=': conversion from 'UINT' to 'float', possible loss of data
+d:\school'sout\school'sout\spawner.cpp(66): warning C4244: 'initializing': conversion from 'UINT' to 'float', possible loss of data
+d:\school'sout\school'sout\spawner.cpp(67): warning C4244: 'initializing': conversion from 'UINT' to 'float', possible loss of data
+d:\school'sout\school'sout\spawner.cpp(78): warning C4244: '=': conversion from 'UINT' to 'float', possible loss of data
+d:\school'sout\school'sout\spawner.cpp(79): warning C4244: '=': conversion from 'UINT' to 'float', possible loss of data
+  winmain.cpp
+d:\school'sout\school'sout\player.h(5): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+d:\school'sout\school'sout\player.h(6): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+d:\school'sout\school'sout\player.h(7): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+d:\school'sout\school'sout\projectile.h(5): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+  schoolsOut.cpp
+d:\school'sout\school'sout\player.h(5): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+d:\school'sout\school'sout\player.h(6): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+d:\school'sout\school'sout\player.h(7): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+d:\school'sout\school'sout\projectile.h(5): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+  Generating Code...
   School'sOut.vcxproj -> D:\School'sOut\Debug\School'sOut.exe

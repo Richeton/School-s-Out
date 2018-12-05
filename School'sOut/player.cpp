@@ -87,8 +87,7 @@ void Player::update(float frameTime)
 		// ... because it starts from the top left
 		// ... of the sprite
 		if (getX() >= GAME_BOUNDARY_XEND - getWidth())
-			setX((float)GAME_BOUNDARY_XEND - getWidth());
-
+			setX((float)GAME_BOUNDARY_XEND - getWidth());		
 		setCurrentFrame(11);
 
 	}
@@ -121,19 +120,11 @@ void Player::update(float frameTime)
 	// Player shoots right when pressed
 	if (input->isKeyDown(VK_RIGHT))
 	{
-		//	setFrames(3, 18);
-		//	setCurrentFrame(3);
-
+	//	shootRight();
 	}
-
 }
 
 void Player::collisions()
 {
-
-}
-
-void Player::shootRight()
-{
-
+	
 }

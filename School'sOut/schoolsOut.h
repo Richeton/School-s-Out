@@ -13,7 +13,10 @@
 #include "textureManager.h"
 #include "image.h"
 #include <list>
+#include "enemySpawn.h"
+#include "spawner.h"
 #include "entityCollection.h"
+#include "gui.h"
 
 //=============================================================================
 // This class is the core of the game
@@ -24,11 +27,16 @@ private:
 	// game items
 	TextureManager stageTexture;	// stage texture
 	TextureManager gameTexture;		// game texture
+	EnemySpawn enemySpawn;
+	Spawner spawner;
 	EntityCollection entityCollection;
+
 	Player* player = new Player();
-	Enemy* enemy1 = new Enemy();
+	
 
 	Image background;
+
+	GUI_Window* guiwin;
 
 public:
 	// Constructor

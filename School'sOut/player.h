@@ -14,12 +14,15 @@ namespace playerNS
 	const int X = GAME_WIDTH / 2 - WIDTH / 2;   // location on screen
 	const int Y = GAME_HEIGHT / 2 - HEIGHT / 2;
 	const float SPEED = 100;                // 100 pixels per second
-	const int   TEXTURE_COLS = 8;           // texture has 8 columns	
+	const int   TEXTURE_COLS = 8;           // texture has 8 columns			
 }
 
 class Player : public Entity
 {
 private:
+	bool takenDamage;		// true if player recently taken damager
+	float invulnerabilityFrame = 3;
+
 public:
 	Player();				//Default Constructor
 	Player(Input &input);
@@ -27,7 +30,15 @@ public:
 
 	void update(float frameTime);
 	void collisions();
+	
 	void shootRight();
+
+	bool getTakenDamage() { return takenDamage; };
+	void setTakenDamage(bool b) { takenDamage = b; };
+
+	float getInvulnerabilityFrame() { return invulnerabilityFrame; };
+	void setInvulnerabilityFrame(float f) { invulnerabilityFrame = f; }
+
 	std::list<Projectile> inventory;
 
 

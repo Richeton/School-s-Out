@@ -30,9 +30,10 @@ protected:
 	DWORD   sleepTime;          // number of milli-seconds to sleep between frames
 	bool    paused;             // true if game is paused
 	RECT pauseRect = RECT();
-	std::string pauseText;
+	std::string pauseText, mainText, restartText;
 	LPD3DXFONT font;
 	bool    initialized;
+	int game_state = 0;   // 0 for main screen, 1 for playing, 2 for dead tentatively
 
 public:
 	// Constructor

@@ -60,6 +60,7 @@ const char TEXTURES_IMAGE[] = "pictures\\allsprites.png";
 // In this game simple constants are used for key mappings. If variables were used
 // it would be possible to save and restore key mappings from a data file.
 const UCHAR ESC_KEY = VK_ESCAPE;		// escape key
+const UCHAR SPACE_KEY = VK_SPACE;		// space key
 const UCHAR ALT_KEY = VK_MENU;			// alt key
 const UCHAR ENTER_KEY = VK_RETURN;		// enter key
 
